@@ -1,7 +1,7 @@
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=linux-lts
-pkgver=6.1.46
+pkgver=6.1.47
 pkgrel=1
 pkgdesc='LTS Linux'
 url="https://www.kernel.org/"
@@ -17,16 +17,18 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   config         # the main kernel config file
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+  0002-linux-doc-sphinx-7.2.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('f5f67bcfccd47f8d9db2d5ba24e33af7778f40a777577d1fba424f4a1712a296'
+sha256sums=('93d58b6af007a5f44dd26831ff310707deb1ab9380c5136a534287eb3fddfcab'
             'SKIP'
-            'b2e7094970d6dcc9fcfc0ea3d1519fbfd3ccb93600eb23b98e2ed80b2b37e832'
-            '1bd8388fcb6ed4eec46450c65eb7a0889a8c541f164a39e3064633981a7a4a3d')
+            '81f7e03d32fb0df2c5151eb47b32bf7b870e1deef086bbb78a48c82a97468f5d'
+            '1bd8388fcb6ed4eec46450c65eb7a0889a8c541f164a39e3064633981a7a4a3d'
+            'd7fcf11728c18cb2e9ffadc2b9ca8d99c7ffbcbd6b55f578753b340e900fccd6')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
