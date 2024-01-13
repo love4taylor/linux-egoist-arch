@@ -2,7 +2,7 @@
 
 pkgbase=linux-lts
 pkgver=6.6.11
-pkgrel=1
+pkgrel=2
 pkgdesc='LTS Linux'
 url='https://www.kernel.org'
 arch=(x86_64)
@@ -31,6 +31,7 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
   0002-skip-simpledrm-if-nvidia-drm.modeset=1-is.patch
+  0003-Default-to-maximum-amount-of-ASLR-bits.patch
   config  # the main kernel config file
 )
 validpgpkeys=(
@@ -42,12 +43,14 @@ sha256sums=('afe2e5a661bb886d762684ebea71607d1ee8cb9dd100279d2810ba20d9671e52'
             'SKIP'
             '21195509fded29d0256abfce947b5a8ce336d0d3e192f3f8ea90bde9dd95a889'
             '2f23be91455e529d16aa2bbf5f2c7fe3d10812749828fc752240c21b2b845849'
-            '2082ebd066860f51a4a92e58f4f3527b521c513432fc744115190bda0057d134')
+            '6400a06e6eb3a24b650bc3b1bba9626622f132697987f718e7ed6a5b8c0317bc'
+            '066bf519ad50a8945ee47b3b3c8b47583469d151c0c8faaeb961be9c11969ddb')
 b2sums=('2a2ad3fd93fdc099a3900918faaf6d7c3abae686694f90980586b7dba4ddd81a9312a7e0c684ddea37835395e6f83e203934988d83982ccc4308631d25d24b07'
         'SKIP'
         '02a10396c92ab93124139fc3e37b1d4d8654227556d0d11486390da35dfc401ff5784ad86d0d2aa7eacac12bc451aa2ff138749748c7e24deadd040d5404734c'
         '5dc21a7a6f0b840e6a671dcf09a865e42f0e2c000d5e45d3f3202c02946a8ab2207858d0b2ef1004648b8c2963efb428298b263c8494be806dfc9b6af66d5413'
-        'e590802d990da15e20f5175da238d8e8f9aaff64f9579e74eac1f79797f3cec5a6b02ba8c9d7a61936085251df8a0431421f186555376daaa3938f4f1fbe99da')
+        'ba6ebe349b3757411364a9ba2deaa30a8d71a247d518c159385977c2b4782771bda4edfc96bd954808617c9ba984d832471b63c11f5bd6003369bfe4051df31f'
+        '06e10af69198f06c4a1611690fdfe36ea276e582873fe03c7d642787e80d60ed90c4f6964f2dcf5af57fb8b2c97a76b14ba6f439c8cafd3893415d8fa94ed3c8')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
