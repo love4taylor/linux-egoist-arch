@@ -1,7 +1,7 @@
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=linux-lts
-pkgver=6.6.24
+pkgver=6.6.25
 pkgrel=1
 pkgdesc='LTS Linux'
 url='https://www.kernel.org'
@@ -39,20 +39,20 @@ validpgpkeys=(
   647F28654894E3BD457199BE38DBBDC86092693E  # Greg Kroah-Hartman
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('3e9ef879dae8319338eb0dc2d2c2025c13257fdeddf6245c000cb5a85a8af6f5'
+sha256sums=('99d210be87908233a55b0fadc0dccd3b95926c0651b6b82e37350b2029de1f44'
             'SKIP'
             '21195509fded29d0256abfce947b5a8ce336d0d3e192f3f8ea90bde9dd95a889'
             '2f23be91455e529d16aa2bbf5f2c7fe3d10812749828fc752240c21b2b845849'
             '6400a06e6eb3a24b650bc3b1bba9626622f132697987f718e7ed6a5b8c0317bc'
             '17d8a31e96dfbf5225b12efc35dc757cc129d4d00741b9781b9cd24b1d57f2ab'
-            '5b5fe5a99e0d1b7f17657f1c2027640be226379289636a9ada27df4b0c9d9daa')
-b2sums=('0f4643c758bb3857396f08b0cc291e1cf7cc7d120fe53791ba8cdaa32f08f20822353e04464551b88e8de64e367de6900da01504e57bc684d47390b51d001285'
+            '40a8133711602e17301beb3f7ba0b98bb34709c92886e72fe2f691a2e0daf900')
+b2sums=('d744ef7ea55202d5cb9adad2d7b22bc8be81bb4b5a03fe52e063192557eadf28d5e62612b6a517ec3180441d8fcec3582a53383df644c32bb45f3e969298af56'
         'SKIP'
         '02a10396c92ab93124139fc3e37b1d4d8654227556d0d11486390da35dfc401ff5784ad86d0d2aa7eacac12bc451aa2ff138749748c7e24deadd040d5404734c'
         '5dc21a7a6f0b840e6a671dcf09a865e42f0e2c000d5e45d3f3202c02946a8ab2207858d0b2ef1004648b8c2963efb428298b263c8494be806dfc9b6af66d5413'
         'ba6ebe349b3757411364a9ba2deaa30a8d71a247d518c159385977c2b4782771bda4edfc96bd954808617c9ba984d832471b63c11f5bd6003369bfe4051df31f'
         '55a20d84c052c9de3e36514a36689238f970f7956e679a425efbff6ef668fbc56ea096ff2b000f3629ea8ec32cdbcbafc44acd27e4a9dffaa885237811ddc558'
-        'e86fa38fa76100f8ff988087248c4248b05798cc35a811a122fdd177cc6c32b2e97d6ff3b25f0cac2521f06dbd640b817367989d5f3b226e1fee24c20cefe4c6')
+        '2cfa0dc12168146b9b1e6fc5d13ef80bcc8506c46bed436dc432128c227d63119ae909675e7913c6f7aab5b78517caad2f4bc71d98dcda0eddfaa7aa2d6eb888')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -86,8 +86,11 @@ prepare() {
 
 build() {
   cd $_srcname
+
+  make htmldocs &
+  local pid_docs=$!
   make all
-  make htmldocs
+  wait "${pid_docs}"
 }
 
 _package() {
