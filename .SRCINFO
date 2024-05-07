@@ -1,7 +1,7 @@
 pkgbase = linux-lts
 	pkgdesc = LTS Linux
 	pkgver = 6.6.30
-	pkgrel = 1
+	pkgrel = 2
 	url = https://www.kernel.org
 	arch = x86_64
 	makedepends = bc
