@@ -1,6 +1,6 @@
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
 
-pkgbase=linux-lts
+pkgbase=linux-egoist
 pkgver=6.6.30
 pkgrel=2
 pkgdesc='LTS Linux'
@@ -34,6 +34,11 @@ source=(
   0005-fix-doc-build.patch
   0006-docutils.patch
   config  # the main kernel config file
+  0021-netfilter-nat-add-brcm-fullcone-support.patch
+  0022-netfilter-nat-add-brcm-fullcone-nft-support.patch
+  0023-net-tcp_brutal-make-it-as-a-built-in-kernel-module.patch
+  0024-net-tcp_brutal-use-div_u64-to-let-it-build-on-32-bit.patch
+  0025-bbrplus.patch
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
@@ -47,7 +52,12 @@ sha256sums=('b66a5b863b0f8669448b74ca83bd641a856f164b29956e539bbcb5fdeeab9cc6'
             '6400a06e6eb3a24b650bc3b1bba9626622f132697987f718e7ed6a5b8c0317bc'
             '17d8a31e96dfbf5225b12efc35dc757cc129d4d00741b9781b9cd24b1d57f2ab'
             '9cb73cacbb3633f207d0c30e738cae9965adcd0b0eb5ecd60563fed1394c0f38'
-            'a6c2b2f94ad484a3c6b8bf5f905dc36bb2eea4ad53e8f996c02d3efc3912b3bc')
+            'a6c2b2f94ad484a3c6b8bf5f905dc36bb2eea4ad53e8f996c02d3efc3912b3bc'
+            'e32903a97ff3b4626b42201829c5c22229448cf98fdf6f755dc06a8d3958221d'
+            '370fe2c70073b79d3e3cb92b166ab1366069a7d5075e0aaf05f893c5862629d0'
+            '49586f20e99796d3aa4a689e389b1183f850e2a112859ddc794cd3caea126e53'
+            'c68c40721bdff6660647d2d0a7c586f48b18cfd95990c4f8e32770ef8464edb9'
+            '54744a7b71269bd8884feb07ad1066abfffb6f749c46e45183236830edb677e8')
 b2sums=('815c85dae71784bc1eb722fc7651abebf344a960f51c473daa50f51f9097b8d64c68c033a3d488f7780cebd29e360c6df6ceff255a1a07d18533d7d950e77db8'
         'SKIP'
         '02a10396c92ab93124139fc3e37b1d4d8654227556d0d11486390da35dfc401ff5784ad86d0d2aa7eacac12bc451aa2ff138749748c7e24deadd040d5404734c'
@@ -55,7 +65,12 @@ b2sums=('815c85dae71784bc1eb722fc7651abebf344a960f51c473daa50f51f9097b8d64c68c03
         'ba6ebe349b3757411364a9ba2deaa30a8d71a247d518c159385977c2b4782771bda4edfc96bd954808617c9ba984d832471b63c11f5bd6003369bfe4051df31f'
         '55a20d84c052c9de3e36514a36689238f970f7956e679a425efbff6ef668fbc56ea096ff2b000f3629ea8ec32cdbcbafc44acd27e4a9dffaa885237811ddc558'
         '0bb42a22c110f06a45e59a9adc194184a51ff97e5584d6ffabca0aa37e1e65ccaf44f43dc744eaa3861d6f6b00e299d4662bcf0c0d94478af9352b4c4f6b0ffd'
-        '88120c8af53a4920f3cda273388c9a153106c75d1702b707bb39921ce923afc4c19d612330d78109aa4ebcbd38acf5e0cad1f3b203fd29ab75ea793504ec82ab')
+        '88120c8af53a4920f3cda273388c9a153106c75d1702b707bb39921ce923afc4c19d612330d78109aa4ebcbd38acf5e0cad1f3b203fd29ab75ea793504ec82ab'
+        '947bd89f5dc4ac9c0dc34fe7d9c4548a36b1107d3afef7be89e6946d2a74f7290624b58f142acf5a38304ea997401b78bc0a1469275e87690a15f06c247eaec8'
+        '59b2fa102e40428081f7bf447f03686bac3c3e4af1813bf4d859eb3ed22154a89f04468ca4c274f47cfd6d6f69d3d447736fd459904db4cfd25d2e9cfecf6131'
+        '4d05b385dae0c2406ca0dc4b032eecfc2db912f45551ec4a00c04ae0a889689a4a45e24ff7e0cd7a8e2fb8c3197600d1aa77762800eae24fbaa0f3336da124ad'
+        '437e724436c1efcc4019f80466cf0c15b1a027cda4482f14b353386b611ef27211a29ac7ad3f5cc3bc8e9461f765bd408744cdc249da38027fff493598fcc220'
+        '35015578e22ce7aefd49358beab5dd0851fe2afd79f6a866b15447a4e7248549207a680c8c6ebc523b72ab5b2724a626cfd44a38def5df21e6acc8fb79a6a4ca')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -80,6 +95,7 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
+  scripts/config -e TCP_CONG_BRUTAL
   make olddefconfig
   diff -u ../config .config || :
 
