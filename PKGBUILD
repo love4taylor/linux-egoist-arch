@@ -7,6 +7,9 @@ pkgdesc='LTS Linux'
 url='https://www.kernel.org'
 arch=(x86_64)
 makedepends=(
+  clang
+  llvm
+  lld
   bc
   cpio
   gettext
@@ -96,7 +99,14 @@ prepare() {
   echo "Setting config..."
   cp ../config .config
   scripts/config -e TCP_CONG_BRUTAL
-  make olddefconfig
+  scripts/config -d LTO_NONE \
+                 -e LTO \
+                 -e LTO_CLANG \
+                 -e ARCH_SUPPORTS_LTO_CLANG \
+                 -e HAS_LTO_CLANG \
+                 -e LTO_CLANG_FULL \
+                 -e HAVE_GCC_PLUGINS
+  make LLVM=1 LLVM_IAS=1 olddefconfig
   diff -u ../config .config || :
 
   make -s kernelrelease > version
@@ -108,7 +118,7 @@ build() {
 
   make htmldocs &
   local pid_docs=$!
-  make all
+  make LLVM=1 LLVM_IAS=1 all
   wait "${pid_docs}"
 }
 
