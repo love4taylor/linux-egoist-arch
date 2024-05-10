@@ -7,9 +7,6 @@ pkgdesc='LTS Linux'
 url='https://www.kernel.org'
 arch=(x86_64)
 makedepends=(
-  clang
-  llvm
-  lld
   bc
   cpio
   gettext
@@ -23,8 +20,10 @@ makedepends=(
 options=('!strip')
 _srcname=linux-$pkgver
 _srctag=v$pkgver
+_llvmver=18.1.5
 source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
+  https://mirrors.edge.kernel.org/pub/tools/llvm/files/llvm-${_llvmver}-x86_64.tar.{xz,sign}
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
   0002-skip-simpledrm-if-nvidia-drm.modeset=1-is.patch
   0003-Default-to-maximum-amount-of-ASLR-bits.patch
@@ -38,9 +37,12 @@ source=(
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
   647F28654894E3BD457199BE38DBBDC86092693E  # Greg Kroah-Hartman
+  2437CB76E544CB6AB3D9DFD399739260CB6CB716  # Nathan Chancellor
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
 sha256sums=('b66a5b863b0f8669448b74ca83bd641a856f164b29956e539bbcb5fdeeab9cc6'
+            'SKIP'
+            'dc1bf4ea80503665f59651e1d76a98aa047d5c54ad354ec398c4c20e7d74711c'
             'SKIP'
             '21195509fded29d0256abfce947b5a8ce336d0d3e192f3f8ea90bde9dd95a889'
             '2f23be91455e529d16aa2bbf5f2c7fe3d10812749828fc752240c21b2b845849'
@@ -52,6 +54,8 @@ sha256sums=('b66a5b863b0f8669448b74ca83bd641a856f164b29956e539bbcb5fdeeab9cc6'
             'c68c40721bdff6660647d2d0a7c586f48b18cfd95990c4f8e32770ef8464edb9'
             '54744a7b71269bd8884feb07ad1066abfffb6f749c46e45183236830edb677e8')
 b2sums=('815c85dae71784bc1eb722fc7651abebf344a960f51c473daa50f51f9097b8d64c68c033a3d488f7780cebd29e360c6df6ceff255a1a07d18533d7d950e77db8'
+        'SKIP'
+        '965df2e7cb9835da28e57916065271d82ef73be41debf8782fe1abb6f066f7d2a7509f4510792531b093b546c8164ca7bc32de37d0f24f367ab8fe122de62a7c'
         'SKIP'
         '02a10396c92ab93124139fc3e37b1d4d8654227556d0d11486390da35dfc401ff5784ad86d0d2aa7eacac12bc451aa2ff138749748c7e24deadd040d5404734c'
         '5dc21a7a6f0b840e6a671dcf09a865e42f0e2c000d5e45d3f3202c02946a8ab2207858d0b2ef1004648b8c2963efb428298b263c8494be806dfc9b6af66d5413'
@@ -94,7 +98,7 @@ prepare() {
                  -e HAS_LTO_CLANG \
                  -e LTO_CLANG_FULL \
                  -e HAVE_GCC_PLUGINS
-  make LLVM=1 LLVM_IAS=1 olddefconfig
+  make LLVM=$PWD/../llvm-${_llvmver}-x86_64/bin/ LLVM_IAS=1 olddefconfig
   diff -u ../config .config || :
 
   make -s kernelrelease > version
@@ -104,7 +108,7 @@ prepare() {
 build() {
   cd $_srcname
 
-  make LLVM=1 LLVM_IAS=1 all
+  make LLVM=$PWD/../llvm-${_llvmver}-x86_64/bin/ LLVM_IAS=1 all
 }
 
 _package() {
