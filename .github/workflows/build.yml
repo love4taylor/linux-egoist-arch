@@ -1,0 +1,31 @@
+name: Build and publish
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+      options: --privileged
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Build Kernel package
+        run: |
+          pacman -Syu --needed --noconfirm sudo
+          sed -i "s|#MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
+          useradd -m user || true
+          passwd -d user
+          printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+          cp -r $GITHUB_WORKSPACE/* /home/user
+          chown -R user /home/user
+          sudo -u user bash -c 'gpg2 --locate-keys torvalds@kernel.org gregkh@kernel.org nathan@kernel.org'
+          sudo -u user bash -c 'cd ~;makepkg -s --noconfirm'
+      - name: Upload Kernel Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkg
+          path: /home/user/*.pkg.tar.zst
