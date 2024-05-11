@@ -2,7 +2,7 @@
 
 pkgbase=linux-egoist
 pkgver=6.6.30
-pkgrel=2
+pkgrel=3
 pkgdesc='LTS Linux'
 url='https://www.kernel.org'
 arch=(x86_64)
