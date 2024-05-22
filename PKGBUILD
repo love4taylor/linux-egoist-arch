@@ -2,7 +2,7 @@
 
 pkgbase=linux-egoist
 pkgver=6.6.31
-pkgrel=1
+pkgrel=2
 pkgdesc='LTS Linux'
 url='https://www.kernel.org'
 arch=(x86_64)
@@ -20,7 +20,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-$pkgver
 _srctag=v$pkgver
-_llvmver=18.1.5
+_llvmver=18.1.6
 source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   https://mirrors.edge.kernel.org/pub/tools/llvm/files/llvm-${_llvmver}-x86_64.tar.{xz,sign}
@@ -42,7 +42,7 @@ validpgpkeys=(
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
 sha256sums=('d6ecff966f8c95ec4cb3bb303904f757b7de6a6bcfef0d0771cb852158e61c20'
             'SKIP'
-            'dc1bf4ea80503665f59651e1d76a98aa047d5c54ad354ec398c4c20e7d74711c'
+            '00c83a3500e6b91155ed37e5ce02b9875ca42d82378499620f0cb1f5497ac0e5'
             'SKIP'
             '21195509fded29d0256abfce947b5a8ce336d0d3e192f3f8ea90bde9dd95a889'
             '2f23be91455e529d16aa2bbf5f2c7fe3d10812749828fc752240c21b2b845849'
@@ -55,7 +55,7 @@ sha256sums=('d6ecff966f8c95ec4cb3bb303904f757b7de6a6bcfef0d0771cb852158e61c20'
             '54744a7b71269bd8884feb07ad1066abfffb6f749c46e45183236830edb677e8')
 b2sums=('521d01b10be736cc7be1108ad0fe9b046aad0ba5af02539d3d0425e424d5c081aaa69446e9f861e5ff4166c0f99201cb827b044d5a70816e4059f53f417c945f'
         'SKIP'
-        '965df2e7cb9835da28e57916065271d82ef73be41debf8782fe1abb6f066f7d2a7509f4510792531b093b546c8164ca7bc32de37d0f24f367ab8fe122de62a7c'
+        'a4941becc7b96caebc6141c374a936ae7eca2db0963c692ccf43358df832a071c6ba67cd4d13c4079ada58feaa4e699b9185bfe69f7a2a5f3eea3e2a60877d15'
         'SKIP'
         '02a10396c92ab93124139fc3e37b1d4d8654227556d0d11486390da35dfc401ff5784ad86d0d2aa7eacac12bc451aa2ff138749748c7e24deadd040d5404734c'
         '5dc21a7a6f0b840e6a671dcf09a865e42f0e2c000d5e45d3f3202c02946a8ab2207858d0b2ef1004648b8c2963efb428298b263c8494be806dfc9b6af66d5413'
