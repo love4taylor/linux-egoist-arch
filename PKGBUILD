@@ -1,7 +1,7 @@
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=linux-egoist
-pkgver=6.6.32
+pkgver=6.6.33
 pkgrel=1
 pkgdesc='LTS Linux'
 url='https://www.kernel.org'
@@ -69,7 +69,7 @@ validpgpkeys=(
   2437CB76E544CB6AB3D9DFD399739260CB6CB716  # Nathan Chancellor
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('aaa824eaf07f61911d22b75ff090a403c3dd0bd73e23933e0bba8b5971436ce1'
+sha256sums=('a13ebc20dc2a75722699949af74aa86a4ce5d544d6daaa6a7de4e8c81b40de97'
             'SKIP'
             '1db676853b419782547e619360a31cfd0f66d13f20b3a84cc8e34d7cde759b20'
             'SKIP'
@@ -111,7 +111,7 @@ sha256sums=('aaa824eaf07f61911d22b75ff090a403c3dd0bd73e23933e0bba8b5971436ce1'
             '58ea4fb07487e24ea63edfd0cf47aff24d3e03d93cba05ec4d31688325d390da'
             'abe144cc14a30e85d05140009f82e2fadaf7326cc200746737bb2e97ba359c56'
             'e6a7bfa9844f5f6bde6ef0a149dd58a7ad7dcfceae45cb08a9a4fd638d6ff0e9')
-b2sums=('6456fcafe10eae6c0cf962b651aa567ba9ad522c4df0c87301ab0060313b8179a818a1d305e0af21599bc5b7bf42e2f61121a2ee0658a065524d098eb2947f0e'
+b2sums=('6ebbd2c2ef18c285cf1176914799fa80120e2bc193d45b71ab76f2da36624c28387af1130f906420ea993cf92efff9c148e9409e7b35aa4d5e3cb72f36568f74'
         'SKIP'
         '67c4753df4a0b0a125bcd0fc2f1d9aab95b57c595ed3a669e95ae703a9372615daf846b698291cb4fbc8d69bf460acdbb738aa156af03bee51ac7294c26866b6'
         'SKIP'
