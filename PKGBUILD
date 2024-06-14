@@ -20,7 +20,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-$pkgver
 _srctag=v$pkgver
-_llvmver=18.1.6
+_llvmver=18.1.7
 source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   https://mirrors.edge.kernel.org/pub/tools/llvm/files/llvm-${_llvmver}-x86_64.tar.{xz,sign}
@@ -71,7 +71,7 @@ validpgpkeys=(
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
 sha256sums=('aaa824eaf07f61911d22b75ff090a403c3dd0bd73e23933e0bba8b5971436ce1'
             'SKIP'
-            '00c83a3500e6b91155ed37e5ce02b9875ca42d82378499620f0cb1f5497ac0e5'
+            '1db676853b419782547e619360a31cfd0f66d13f20b3a84cc8e34d7cde759b20'
             'SKIP'
             '21195509fded29d0256abfce947b5a8ce336d0d3e192f3f8ea90bde9dd95a889'
             '2f23be91455e529d16aa2bbf5f2c7fe3d10812749828fc752240c21b2b845849'
@@ -113,7 +113,7 @@ sha256sums=('aaa824eaf07f61911d22b75ff090a403c3dd0bd73e23933e0bba8b5971436ce1'
             'e6a7bfa9844f5f6bde6ef0a149dd58a7ad7dcfceae45cb08a9a4fd638d6ff0e9')
 b2sums=('6456fcafe10eae6c0cf962b651aa567ba9ad522c4df0c87301ab0060313b8179a818a1d305e0af21599bc5b7bf42e2f61121a2ee0658a065524d098eb2947f0e'
         'SKIP'
-        'a4941becc7b96caebc6141c374a936ae7eca2db0963c692ccf43358df832a071c6ba67cd4d13c4079ada58feaa4e699b9185bfe69f7a2a5f3eea3e2a60877d15'
+        '67c4753df4a0b0a125bcd0fc2f1d9aab95b57c595ed3a669e95ae703a9372615daf846b698291cb4fbc8d69bf460acdbb738aa156af03bee51ac7294c26866b6'
         'SKIP'
         '02a10396c92ab93124139fc3e37b1d4d8654227556d0d11486390da35dfc401ff5784ad86d0d2aa7eacac12bc451aa2ff138749748c7e24deadd040d5404734c'
         '5dc21a7a6f0b840e6a671dcf09a865e42f0e2c000d5e45d3f3202c02946a8ab2207858d0b2ef1004648b8c2963efb428298b263c8494be806dfc9b6af66d5413'
