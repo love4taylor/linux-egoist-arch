@@ -17,7 +17,6 @@ jobs:
       - name: Build Kernel package
         run: |
           pacman -Syu --needed --noconfirm sudo
-          pacman -U --noconfirm https://gist.githubusercontent.com/love4taylor/47e6eea5dec795413251adf4ed286ec9/raw/b8d7ce82b7d49787c76fff28f739d24197856859/pahole-1:1.26-2-x86_64.pkg.tar.zst
           sed -i "s|#MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
           useradd -m user || true
           passwd -d user
