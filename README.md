@@ -56,7 +56,7 @@ options root=PARTUUID=89d2b8d2-5e05-4e77-aa42-40314ea38958 zswap.enabled=0 rw ro
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## Patchs
+## Patches
 
 - Arch Linux official patches
 - Graysky's Kernel patch enables compiler optimizations for additional CPUs
