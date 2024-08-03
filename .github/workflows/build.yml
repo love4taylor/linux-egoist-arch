@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build Kernel package
         run: |
+          rm -rf /__t/* && df -h
           pacman -Syu --needed --noconfirm sudo
           sed -i "s|#MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
           useradd -m user || true
