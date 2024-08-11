@@ -69,5 +69,6 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Notice
 
-1. **The kernel has a built-in TCP Brutal module, please do not use the official script to install the DKMS module at the same time.**
-2. To avoid having to recompile iptables, I've **hardcoded** fullcone to be enabled, so you can just use MASQUERADE as usual and it will **force** to fullcone.
+1. **This kernel has a built-in TCP Brutal module, please do not use the official installation script to install the DKMS module.**
+2. I **hardcoded** the enable parameter for fullcone to prevent recompiling iptables or adding nftables parameters to use fullcone, so you can use MASQUERADE as usual, and it will **force** to using fullcone.
+
